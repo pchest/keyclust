@@ -3,7 +3,7 @@ This package is designed to enable researchers to quickly and efficiently genera
 
 ## Installation
 
-```
+```{r}
 install.packages("devtools") # If not already installed
 
 devtools::install_github("pchest/keyclust")
@@ -13,7 +13,7 @@ devtools::install_github("pchest/keyclust")
 
 ### Creating a cosimilarity matrix from a pre-fitted word embeddings model
 
-```
+```{r}
 library(keyclust)
 
 simmat <- wordemb_FasttextEng_sample |>
@@ -23,7 +23,7 @@ simmat <- wordemb_FasttextEng_sample |>
 
 ### Extracting a semantically-related set of keywords from a cosimilarity matrix
 
-```
+```{r}
 seed_months <- c("october", "november")
 
 out_months <- keyclust(simmat, seed_words = seed_months, max_n = 10)
