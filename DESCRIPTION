@@ -1,11 +1,11 @@
 Package: keyclust
 Type: Package
 Title: A Model for Semi-Supervised Keyword Extraction from Word Embedding Models
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: person("Patrick", "Chester",
                   email = "patrickjchester@gmail.com",
                   role = c("aut", "cre"))
-Description: This package is designed to enable researchers to efficiently and quickly extract semantically-related keywords using a fitted embedding model.
+Description: An R package designed to enable researchers to efficiently and quickly extract semantically-related keywords using a fitted embedding model.
 Encoding: UTF-8
 License: GPL-3
 Depends:
