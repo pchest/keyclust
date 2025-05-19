@@ -38,7 +38,7 @@ keyclust.data.frame <- function(sim_mat,
                             dictionary = NULL,
                             exclude = NULL,
                             verbose = TRUE){
-  row_names <- col_names <- mean_sim <- X <- Group_similarity <- NULL
+  row_names <- col_names <- ..col_names <- mean_sim <- X <- Group_similarity <- NULL
   sim_mat <- as.data.table(sim_mat)
   if(verbose) {cat('Initializing with', paste(seed_words, collapse = ", "), '\n')}
   in_mat <- seed_words %in% names(sim_mat)
@@ -92,7 +92,7 @@ keyclust.matrix <- function(sim_mat,
                             dictionary = NULL,
                             exclude = NULL,
                             verbose = TRUE){
-  row_names <- col_names <- mean_sim <- X <- Group_similarity <- NULL
+  row_names <- col_names <- ..col_names <- mean_sim <- X <- Group_similarity <- NULL
   sim_mat <- as.data.table(sim_mat)
   if(verbose) {cat('Initializing with', paste(seed_words, collapse = ", "), '\n')}
   in_mat <- seed_words %in% names(sim_mat)

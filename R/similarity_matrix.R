@@ -37,6 +37,7 @@ similarity_matrix.matrix <- function(x,
 similarity_matrix.data.table <- function(x,
                                          words = NULL,
                                          max_terms = 25000){
+    col_keep <- ..col_keep <- NULL
     if(is.null(words)) stop("Provide words column name or vector")
     if(dim(x)[1] > max_terms) x <- x[1:max_terms, ]
     if(length(words) == 1) {
@@ -57,6 +58,7 @@ similarity_matrix.data.table <- function(x,
 similarity_matrix.data.frame <- function(x,
                                          words = NULL,
                                          max_terms = 25000){
+    col_keep <- NULL
     if(is.null(words)) stop("Provide words column name or vector")
     if(dim(x)[1] > max_terms) x <- x[1:max_terms, ]
     if(length(words) == 1) {
