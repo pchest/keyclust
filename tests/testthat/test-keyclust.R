@@ -1,11 +1,16 @@
 context("test keyclust")
 
 test_that("keyclust works", {
-    skip_on_cran()
+    #skip_on_cran()
+
+    simmat_FasttextEng_sample <- wordemb_FasttextEng_sample |>
+      process_embed(words='words') |>
+      similarity_matrix(words = "words")
 
     seed_words = c("september", "october", "november")
 
     ## Test 1: keyclust produces sensible output
+
 
     r1 <- keyclust(sim_mat = simmat_FasttextEng_sample, seed_words = seed_words, max_n = 8, sim_thresh = .4)
 

@@ -1,12 +1,12 @@
 context("test keyclust")
 
 test_that("process_embed works", {
-    skip_on_cran()
+    #skip_on_cran()
 
     wordemb_FasttextEng_pe <- wordemb_FasttextEng_sample |>
         process_embed(words = "words")
 
-    ## Test 1: Number of tokesn has gone down
+    ## Test 1: Number of tokens has gone down
     expect_true(dim(wordemb_FasttextEng_pe)[1] < dim(wordemb_FasttextEng_sample)[1])
 
     ## Test 2: no duplicate entries

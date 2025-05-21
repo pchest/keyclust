@@ -1,7 +1,7 @@
 context("test keyclust")
 
 test_that("keyclust works", {
-    skip_on_cran()
+    #skip_on_cran()
 
     seed_words = c("October", "November", "December")
 
