@@ -39,6 +39,11 @@ a length and cosimilarity determined by the user
 \dontrun{
 # Create a set of keywords using a pre-defined set of seeds
 seeds <- c("October", "November")
+# Create a cosine similarity matrix from a word embedding model
+simmat_FasttextEng_sample <- wordemb_FasttextEng_sample |>
+    process_embed(words='words') |>
+    similarity_matrix(words = "words")
+# Use keyclust to generate a set of keywords
 months <- keyclust(simmat_FasttextEng_sample, seed_words = seeds, max_n = 8)
 }
 }

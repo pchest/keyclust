@@ -17,6 +17,11 @@
 #' \dontrun{
 #' # Create a set of keywords using a pre-defined set of seeds
 #' seeds <- c("October", "November")
+#' # Create a cosine similarity matrix from a word embedding model
+#' simmat_FasttextEng_sample <- wordemb_FasttextEng_sample |>
+#'     process_embed(words='words') |>
+#'     similarity_matrix(words = "words")
+#' # Use keyclust to generate a set of keywords
 #' months <- keyclust(simmat_FasttextEng_sample, seed_words = seeds, max_n = 8)
 #' }
 #' @export
@@ -38,7 +43,7 @@ keyclust.data.frame <- function(sim_mat,
                             dictionary = NULL,
                             exclude = NULL,
                             verbose = TRUE){
-  row_names <- col_names <- ..col_names <- mean_sim <- X <- Group_similarity <- NULL
+  row_names <- col_names <- mean_sim <- X <- Group_similarity <- NULL
   sim_mat <- as.data.table(sim_mat)
   if(verbose) {cat('Initializing with', paste(seed_words, collapse = ", "), '\n')}
   in_mat <- seed_words %in% names(sim_mat)
@@ -56,7 +61,7 @@ keyclust.data.frame <- function(sim_mat,
   if(!is.null(exclude)) sim_mat[!(row_names %in% exclude), ][, (exclude) := NULL]
   col_names <- c("row_names", seed_words)
   while(length(seed_words) < max_n){
-    sub <- sim_mat[, ..col_names
+    sub <- sim_mat[, .SD, .SDcols = col_names
                     ][, mean_sim := rowMeans(.SD), .SD = seed_words
                     ][!(row_names %in% seed_words), ] |>
         setorder(-mean_sim)
@@ -66,7 +71,7 @@ keyclust.data.frame <- function(sim_mat,
     col_names <- c("row_names", seed_words)
   }
   dict <- data.table(row_names = seed_words, X = 1:length(seed_words))
-  sim_mat <- sim_mat[, ..col_names][row_names %in% seed_words, ] |>
+  sim_mat <- sim_mat[, .SD, .SDcols = col_names][row_names %in% seed_words, ] |>
     merge(dict, by = "row_names") |>
     setorder(X)
   sim_mat[, X := NULL]
@@ -92,7 +97,7 @@ keyclust.matrix <- function(sim_mat,
                             dictionary = NULL,
                             exclude = NULL,
                             verbose = TRUE){
-  row_names <- col_names <- ..col_names <- mean_sim <- X <- Group_similarity <- NULL
+  row_names <- col_names <- mean_sim <- X <- Group_similarity <- NULL
   sim_mat <- as.data.table(sim_mat)
   if(verbose) {cat('Initializing with', paste(seed_words, collapse = ", "), '\n')}
   in_mat <- seed_words %in% names(sim_mat)
@@ -111,7 +116,7 @@ keyclust.matrix <- function(sim_mat,
   if(!is.null(exclude)) sim_mat[!(row_names %in% exclude), ][, (exclude) := NULL]
   col_names <- c("row_names", seed_words)
   while(length(seed_words) < max_n){
-    sub <- sim_mat[, ..col_names
+    sub <- sim_mat[, .SD, .SDcols = col_names
                     ][, mean_sim := rowMeans(.SD), .SD = seed_words
                     ][!(row_names %in% seed_words), ] |>
         setorder(-mean_sim)
@@ -121,7 +126,7 @@ keyclust.matrix <- function(sim_mat,
     col_names <- c("row_names", seed_words)
   }
   dict <- data.table(row_names = seed_words, X = 1:length(seed_words))
-  sim_mat <- sim_mat[, ..col_names][row_names %in% seed_words, ] |>
+  sim_mat <- sim_mat[, .SD, .SDcols = col_names][row_names %in% seed_words, ] |>
     merge(dict, by = "row_names") |>
     setorder(X)
   sim_mat[, X := NULL]
