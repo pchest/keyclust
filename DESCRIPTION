@@ -19,6 +19,6 @@ Suggests:
 LinkingTo: Rcpp
 LazyData: TRUE
 LazyDataCompression: xz
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Language: en-US
 Roxygen: list(markdown = TRUE)
