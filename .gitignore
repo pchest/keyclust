@@ -2,6 +2,7 @@
 .Rhistory
 .RData
 .Rproj
+.Rcheck
 .Ruserdata
 .github
 src/*.o
