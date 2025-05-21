@@ -10,3 +10,4 @@ src/*.so
 src/*.dll
 conclust.Rproj
 
+inst/doc
