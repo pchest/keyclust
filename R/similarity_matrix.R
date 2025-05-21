@@ -37,13 +37,13 @@ similarity_matrix.matrix <- function(x,
 similarity_matrix.data.table <- function(x,
                                          words = NULL,
                                          max_terms = 25000){
-    col_keep <- ..col_keep <- NULL
+    col_keep <- NULL
     if(is.null(words)) stop("Provide words column name or vector")
     if(dim(x)[1] > max_terms) x <- x[1:max_terms, ]
     if(length(words) == 1) {
       w <- x[[words]]
       col_keep <- which(!(names(x) %in% words))
-      x <- x[ , ..col_keep, drop = FALSE]
+      x <- x[ , .SD, .SDcols = col_keep, drop = FALSE]
       x <- as.matrix(x)
       words <- w
       }
