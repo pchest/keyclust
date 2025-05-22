@@ -84,6 +84,7 @@ keyclust.data.frame <- function(sim_mat,
   if(!is.null(dictionary)) word_df <- merge(word_df, dictionary, by = "Term", all.x = TRUE)
   word_df <- word_df |>
     setorder(-Group_similarity)
+  rownames(word_df) <- NULL
   out <- list(Concept_lex = word_df, Cosim_mat = out_mat)
   class(out) <- c("keyclust", "list")
   return(out)
@@ -139,6 +140,7 @@ keyclust.matrix <- function(sim_mat,
   if(!is.null(dictionary)) word_df <- merge(word_df, dictionary, by = "Term", all.x = TRUE)
   word_df <- word_df |>
     setorder(-Group_similarity)
+  rownames(word_df) <- NULL
   out <- list(Concept_lex = word_df, Cosim_mat = out_mat)
   class(out) <- c("keyclust", "list")
   return(out)
