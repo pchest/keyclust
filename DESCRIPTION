@@ -5,7 +5,7 @@ Version: 1.3
 Authors@R: person("Patrick", "Chester",
                   email = "patrickjchester@gmail.com",
                   role = c("aut", "cre"))
-Description: An R package designed to enable researchers to efficiently and quickly extract semantically-related keywords using a fitted embedding model. For more details about the methods applied in this package, see Chester, Patrick (2025) <https://osf.io/5b7rq/?view_only=f8b9eeba02dd48979f9c3095deabe145>.
+Description: An R package designed to enable researchers to efficiently and quickly extract semantically-related keywords using a fitted embedding model. For more details about the methods applied in this package, see Chester (2025) <https://doi.org/10.17605/OSF.IO/5B7RQ>.
 Encoding: UTF-8
 License: GPL-3
 Depends:
@@ -14,6 +14,9 @@ Imports:
     data.table (>= 1.14.8),
     textstem (>= 0.1.4)
 Suggests:
+    knitr,
+    R.utils,
+    rmarkdown,
     spelling,
     testthat
 LinkingTo: Rcpp
@@ -22,3 +25,5 @@ LazyDataCompression: xz
 RoxygenNote: 7.3.2
 Language: en-US
 Roxygen: list(markdown = TRUE)
+VignetteBuilder: knitr
+Readme: README.md
