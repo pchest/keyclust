@@ -4,3 +4,5 @@
 .gitignore
 ^.*\.vec$
 ^.*\.txt$
+README.Rmd
+README.html
