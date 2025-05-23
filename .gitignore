@@ -1,13 +1,15 @@
 .Rproj.user
 .Rhistory
 .RData
-.Rproj
+^.*\.Rproj
 .Rcheck
 .Ruserdata
 .github
+^.*\.vec$
+^.*\.txt$
 src/*.o
 src/*.so
 src/*.dll
 conclust.Rproj
-
 inst/doc
+/Meta/
