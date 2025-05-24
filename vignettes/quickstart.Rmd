@@ -1,7 +1,5 @@
 ---
 title: "Quick Start Guide for keyclust"
-author: "Patrick Chester"
-date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
     toc: true
