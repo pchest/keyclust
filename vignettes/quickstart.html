@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Patrick Chester" />
+
+<meta name="date" content="2025-05-24" />
+
+<title>Quick Start Guide for keyclust</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Quick Start Guide for keyclust</h1>
+<h4 class="author">Patrick Chester</h4>
+<h4 class="date">2025-05-24</h4>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#introduction" id="toc-introduction">Introduction</a></li>
+<li><a href="#load-libraries" id="toc-load-libraries">Load
+libraries</a></li>
+<li><a href="#fasttext-embeddings-with-english-language" id="toc-fasttext-embeddings-with-english-language">FastText Embeddings
+with English Language</a></li>
+<li><a href="#glove-embeddings-with-english-language" id="toc-glove-embeddings-with-english-language">GloVe Embeddings with
+English Language</a></li>
+<li><a href="#fasttext-embeddings-with-chinese-language" id="toc-fasttext-embeddings-with-chinese-language">FastText Embeddings
+with Chinese Language</a></li>
+<li><a href="#final-notes" id="toc-final-notes">Final notes</a></li>
+</ul>
+</div>
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>The <code>keyclust</code> algorithm is designed to allow users to
+produce keyword sets of relevance to concepts of interest given a fitted
+word embedding model and seed words representing the target
+concepts.</p>
+<p>In this guide we will cover how to apply <code>keyclust</code> to two
+English-language embedding models from FastText and GloVe, as well as a
+Chinese-language embedding model from FastText.</p>
+</div>
+<div id="load-libraries" class="section level2">
+<h2>Load libraries</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">library</span>(R.utils)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="fu">library</span>(keyclust)</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>embedding_rows <span class="ot">&lt;-</span> <span class="dv">20000</span></span></code></pre></div>
+<p><em>Note:</em> The resources required to compute cosine similarity
+increases quadratically with the number of words in the embeddings
+input. For example, if you are computing similarities between 10 terms,
+that will require 10^2 = 100 computations. For 20 terms, it will be 400
+calculations! For this reason, I don’t suggest that you input embedding
+models with more than 20k terms on a standard laptop (with 16gb of ram)
+into this function. Though, higher numbers of terms will typically allow
+you to target more precise word clusters.</p>
+<div id="data-download" class="section level3">
+<h3>Data download</h3>
+<p>Here we download three embedding models from FastText and GloVe for
+use as inputs to <code>keyclust</code>. These models have been tested
+and confirmed to work by the author of this package.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">options</span>(<span class="at">timeout =</span> <span class="dv">400</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co"># For English language embeddings produced by the FastText Model</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(<span class="st">&quot;cc.en.300.vec&quot;</span>)) {</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>  <span class="fu">download.file</span>(<span class="st">&quot;https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz&quot;</span>,  <span class="at">destfile =</span> <span class="st">&quot;cc.en.300.vec.gz&quot;</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>  <span class="fu">gunzip</span>(<span class="st">&quot;cc.en.300.vec.gz&quot;</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>}</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co"># For English language embeddings produced by the GloVe Model</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(<span class="st">&quot;glove.6B.300d.txt&quot;</span>)) {</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>  <span class="fu">download.file</span>(<span class="st">&quot;https://nlp.stanford.edu/data/glove.6B.zip&quot;</span>, <span class="at">destfile =</span> <span class="st">&quot;glove6B.zip&quot;</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>  <span class="fu">unzip</span>(<span class="st">&quot;glove6B.zip&quot;</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>}</span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="co"># For Chinese language embeddings produced by the FastText Model</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(<span class="st">&quot;cc.zh.300.vec&quot;</span>)) {</span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>  <span class="fu">download.file</span>(<span class="st">&quot;https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.zh.300.vec.gz&quot;</span>,  <span class="at">destfile =</span> <span class="st">&quot;cc.zh.300.vec.gz&quot;</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>  <span class="fu">gunzip</span>(<span class="st">&quot;cc.zh.300.vec.gz&quot;</span>)</span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+</div>
+<div id="fasttext-embeddings-with-english-language" class="section level2">
+<h2>FastText Embeddings with English Language</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>ft_embed <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">&quot;cc.en.300.vec&quot;</span>, <span class="at">nrows =</span> embedding_rows, <span class="at">skip =</span> <span class="dv">1</span>, <span class="at">quote =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">names</span>(ft_embed) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;words&quot;</span>, <span class="fu">paste0</span>(<span class="st">&quot;V&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">300</span>)) <span class="co"># Default column names are not great</span></span></code></pre></div>
+<div id="checking-dimensions" class="section level3">
+<h3>Checking dimensions</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">dim</span>(ft_embed)</span></code></pre></div>
+<pre><code>## [1] 20000   301</code></pre>
+</div>
+<div id="inspecting-the-data" class="section level3">
+<h3>Inspecting the data</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">head</span>(ft_embed[, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]) <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<table style="width:100%;">
+<colgroup>
+<col width="7%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">words</th>
+<th align="right">V1</th>
+<th align="right">V2</th>
+<th align="right">V3</th>
+<th align="right">V4</th>
+<th align="right">V5</th>
+<th align="right">V6</th>
+<th align="right">V7</th>
+<th align="right">V8</th>
+<th align="right">V9</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">,</td>
+<td align="right">0.1250</td>
+<td align="right">-0.1079</td>
+<td align="right">0.0245</td>
+<td align="right">-0.2529</td>
+<td align="right">0.1057</td>
+<td align="right">-0.0184</td>
+<td align="right">0.1177</td>
+<td align="right">-0.0701</td>
+<td align="right">-0.0401</td>
+</tr>
+<tr class="even">
+<td align="left">the</td>
+<td align="right">-0.0517</td>
+<td align="right">0.0740</td>
+<td align="right">-0.0131</td>
+<td align="right">0.0447</td>
+<td align="right">-0.0343</td>
+<td align="right">0.0212</td>
+<td align="right">0.0069</td>
+<td align="right">-0.0163</td>
+<td align="right">-0.0181</td>
+</tr>
+<tr class="odd">
+<td align="left">.</td>
+<td align="right">0.0342</td>
+<td align="right">-0.0801</td>
+<td align="right">0.1162</td>
+<td align="right">-0.3968</td>
+<td align="right">-0.0147</td>
+<td align="right">-0.0533</td>
+<td align="right">0.0606</td>
+<td align="right">-0.1052</td>
+<td align="right">0.0005</td>
+</tr>
+<tr class="even">
+<td align="left">and</td>
+<td align="right">0.0082</td>
+<td align="right">-0.0899</td>
+<td align="right">0.0265</td>
+<td align="right">-0.0086</td>
+<td align="right">-0.0609</td>
+<td align="right">0.0068</td>
+<td align="right">0.0652</td>
+<td align="right">0.0106</td>
+<td align="right">-0.0475</td>
+</tr>
+<tr class="odd">
+<td align="left">to</td>
+<td align="right">0.0047</td>
+<td align="right">0.0281</td>
+<td align="right">-0.0296</td>
+<td align="right">-0.0108</td>
+<td align="right">-0.0620</td>
+<td align="right">-0.0532</td>
+<td align="right">-0.0980</td>
+<td align="right">0.0970</td>
+<td align="right">-0.0864</td>
+</tr>
+<tr class="even">
+<td align="left">of</td>
+<td align="right">-0.0001</td>
+<td align="right">-0.1877</td>
+<td align="right">-0.0711</td>
+<td align="right">-0.4632</td>
+<td align="right">0.0002</td>
+<td align="right">0.0115</td>
+<td align="right">-0.0588</td>
+<td align="right">0.0574</td>
+<td align="right">-0.0275</td>
+</tr>
+</tbody>
+</table>
+<p>This is generally what a fitted embedding model should look like. The
+columns are the embedding weights and the rows are the tokens that
+correspond to the embedding weights. The industry standard is to fit
+models with 300 embedding dimensions, which is also true of this
+FastText model.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">cat</span>(ft_embed<span class="sc">$</span>words[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>])</span></code></pre></div>
+<pre><code>## , the . and to of a &lt;/s&gt; in is : I for that ) &quot; ( on with it you The was as are at / ’ be by &#39;s this have from or ! not your an &#39; but ? can - will s my has all we they he his more one about their &#39;t so which It out up ... were had who like ; “ our would ” time been if also just when her This me there do what some other In them – 1 get new into &amp; We than A no only</code></pre>
+<p>The embeddings matrix is ordered by frequency. It also includes
+punctuation and variations of capitalization.</p>
+</div>
+<div id="preprocessing-embeddings" class="section level3">
+<h3>Preprocessing Embeddings</h3>
+<p>Let’s remove punctuation and capitalization for this first exercise.
+Let’s also lemmatize to combine similar terms.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>ft_embed_processed <span class="ot">&lt;-</span> <span class="fu">process_embed</span>(ft_embed, <span class="at">words =</span> <span class="st">&quot;words&quot;</span>, <span class="at">punct =</span> <span class="cn">TRUE</span>, <span class="at">tolower =</span> <span class="cn">TRUE</span>, <span class="at">lemmatize =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="fu">dim</span>(ft_embed_processed)</span></code></pre></div>
+<pre><code>## [1] 10787   301</code></pre>
+<p>We can see that we’ve reduced the number of terms from 20k to
+~11k.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">cat</span>(ft_embed_processed<span class="sc">$</span>words[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>])</span></code></pre></div>
+<pre><code>## the and to of a in be i for that on with it you as at by this have from or not your but can will s my all we they he his much one about their so which out up who like our would time if also just when her me there do what some other them 1 get new into than no only first any its people 2 very t over she how make say two may know then see after good year now 3 use because work us don way back many think where even him through</code></pre>
+<p>The remaining words appear to be more useful, as there are few with
+duplicated semantic meaning. I.e. running and run should be treated
+roughly the same as semantic entities.</p>
+</div>
+<div id="creating-a-cosine-similarity-matrix" class="section level3">
+<h3>Creating a cosine similarity matrix</h3>
+<p><code>keyclust</code> takes as an input a matrix representing the
+cosine similarity between each pairing of words.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>ft_embed_sim_mat <span class="ot">&lt;-</span> <span class="fu">similarity_matrix</span>(ft_embed_processed, <span class="at">words =</span> <span class="st">&quot;words&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">str</span>(ft_embed_sim_mat)</span></code></pre></div>
+<pre><code>##  num [1:10787, 1:10787] 1 0.516 0.476 0.596 0.505 ...
+##  - attr(*, &quot;dimnames&quot;)=List of 2
+##   ..$ : chr [1:10787] &quot;the&quot; &quot;and&quot; &quot;to&quot; &quot;of&quot; ...
+##   ..$ : chr [1:10787] &quot;the&quot; &quot;and&quot; &quot;to&quot; &quot;of&quot; ...</code></pre>
+<p>We can see that the output of this function is a square cosine
+similarity matrix.</p>
+</div>
+<div id="seeds-for-target-concept-peace" class="section level3">
+<h3>Seeds for target concept: Peace</h3>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>peace <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;peace&quot;</span>, <span class="st">&quot;harmony&quot;</span>, <span class="st">&quot;tranquility&quot;</span>)</span></code></pre></div>
+</div>
+<div id="running-the-keyclust-model" class="section level3">
+<h3>Running the keyclust model</h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>keyclust_peace_output <span class="ot">&lt;-</span> <span class="fu">keyclust</span>(<span class="at">sim_mat =</span> ft_embed_sim_mat,</span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>                                  <span class="at">seed_words =</span> peace,</span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>                                  <span class="at">max_n =</span> <span class="dv">20</span>)</span></code></pre></div>
+<pre><code>## Initializing with peace, harmony, tranquility 
+## tranquility not found
+## Added unity 
+## Added reconciliation 
+## Added equality 
+## Added solidarity 
+## Added dignity 
+## Added compassion 
+## Added empowerment 
+## Added prosperity 
+## Added happiness 
+## Added friendship 
+## Added spirituality 
+## Added humility 
+## Added empathy 
+## Added kindness 
+## Added gratitude 
+## Added generosity 
+## Added devotion 
+## Added admiration</code></pre>
+<p><em>Note:</em> In this example <code>keyclust</code> restricted to
+producing a maximum output of 20 terms</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>keyclust_peace_output <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>  <span class="fu">terms</span>() <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Term</th>
+<th align="right">Group_similarity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">compassion</td>
+<td align="right">0.4920981</td>
+</tr>
+<tr class="even">
+<td align="left">kindness</td>
+<td align="right">0.4516728</td>
+</tr>
+<tr class="odd">
+<td align="left">humility</td>
+<td align="right">0.4420731</td>
+</tr>
+<tr class="even">
+<td align="left">gratitude</td>
+<td align="right">0.4400226</td>
+</tr>
+<tr class="odd">
+<td align="left">solidarity</td>
+<td align="right">0.4294614</td>
+</tr>
+<tr class="even">
+<td align="left">dignity</td>
+<td align="right">0.4289032</td>
+</tr>
+<tr class="odd">
+<td align="left">empathy</td>
+<td align="right">0.4272611</td>
+</tr>
+<tr class="even">
+<td align="left">devotion</td>
+<td align="right">0.4142153</td>
+</tr>
+<tr class="odd">
+<td align="left">generosity</td>
+<td align="right">0.4107149</td>
+</tr>
+<tr class="even">
+<td align="left">admiration</td>
+<td align="right">0.4017974</td>
+</tr>
+<tr class="odd">
+<td align="left">friendship</td>
+<td align="right">0.4009782</td>
+</tr>
+<tr class="even">
+<td align="left">spirituality</td>
+<td align="right">0.3875267</td>
+</tr>
+<tr class="odd">
+<td align="left">empowerment</td>
+<td align="right">0.3863981</td>
+</tr>
+<tr class="even">
+<td align="left">happiness</td>
+<td align="right">0.3849713</td>
+</tr>
+<tr class="odd">
+<td align="left">peace</td>
+<td align="right">0.3808420</td>
+</tr>
+<tr class="even">
+<td align="left">equality</td>
+<td align="right">0.3803726</td>
+</tr>
+<tr class="odd">
+<td align="left">prosperity</td>
+<td align="right">0.3795832</td>
+</tr>
+<tr class="even">
+<td align="left">harmony</td>
+<td align="right">0.3662088</td>
+</tr>
+<tr class="odd">
+<td align="left">unity</td>
+<td align="right">0.3648115</td>
+</tr>
+<tr class="even">
+<td align="left">reconciliation</td>
+<td align="right">0.3454598</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="seeds-for-target-concept-democracy" class="section level3">
+<h3>Seeds for target concept: Democracy</h3>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>democracy <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;election&quot;</span>, <span class="st">&quot;vote&quot;</span>, <span class="st">&quot;campaign&quot;</span>, <span class="st">&quot;candidate&quot;</span>)</span></code></pre></div>
+</div>
+<div id="running-the-keyclust-model-1" class="section level3">
+<h3>Running the keyclust model</h3>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a>keyclust_democracy_output <span class="ot">&lt;-</span> <span class="fu">keyclust</span>(<span class="at">sim_mat =</span> ft_embed_sim_mat,</span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>                                      <span class="at">seed_words =</span> democracy,</span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>                                      <span class="at">max_n =</span> <span class="dv">20</span>)</span></code></pre></div>
+<pre><code>## Initializing with election, vote, campaign, candidate 
+## Added ballot 
+## Added voter 
+## Added electoral 
+## Added electorate 
+## Added democratic 
+## Added democrat 
+## Added republican 
+## Added gop 
+## Added conservative 
+## Added liberal 
+## Added politician 
+## Added senator 
+## Added senate 
+## Added congressional 
+## Added legislator 
+## Added legislature</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>keyclust_democracy_output <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>  <span class="fu">terms</span>() <span class="sc">|&gt;</span></span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Term</th>
+<th align="right">Group_similarity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">democrat</td>
+<td align="right">0.5877196</td>
+</tr>
+<tr class="even">
+<td align="left">republican</td>
+<td align="right">0.5804960</td>
+</tr>
+<tr class="odd">
+<td align="left">democratic</td>
+<td align="right">0.5275086</td>
+</tr>
+<tr class="even">
+<td align="left">gop</td>
+<td align="right">0.5260098</td>
+</tr>
+<tr class="odd">
+<td align="left">election</td>
+<td align="right">0.5169188</td>
+</tr>
+<tr class="even">
+<td align="left">senator</td>
+<td align="right">0.5108502</td>
+</tr>
+<tr class="odd">
+<td align="left">electorate</td>
+<td align="right">0.5055736</td>
+</tr>
+<tr class="even">
+<td align="left">senate</td>
+<td align="right">0.4947832</td>
+</tr>
+<tr class="odd">
+<td align="left">conservative</td>
+<td align="right">0.4928956</td>
+</tr>
+<tr class="even">
+<td align="left">politician</td>
+<td align="right">0.4814703</td>
+</tr>
+<tr class="odd">
+<td align="left">liberal</td>
+<td align="right">0.4772023</td>
+</tr>
+<tr class="even">
+<td align="left">voter</td>
+<td align="right">0.4746319</td>
+</tr>
+<tr class="odd">
+<td align="left">congressional</td>
+<td align="right">0.4691219</td>
+</tr>
+<tr class="even">
+<td align="left">legislator</td>
+<td align="right">0.4628622</td>
+</tr>
+<tr class="odd">
+<td align="left">electoral</td>
+<td align="right">0.4579694</td>
+</tr>
+<tr class="even">
+<td align="left">legislature</td>
+<td align="right">0.4579463</td>
+</tr>
+<tr class="odd">
+<td align="left">vote</td>
+<td align="right">0.4387069</td>
+</tr>
+<tr class="even">
+<td align="left">candidate</td>
+<td align="right">0.4149512</td>
+</tr>
+<tr class="odd">
+<td align="left">ballot</td>
+<td align="right">0.4002606</td>
+</tr>
+<tr class="even">
+<td align="left">campaign</td>
+<td align="right">0.3691981</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">c</span>(<span class="st">&quot;ft_embed&quot;</span>, <span class="st">&quot;ft_embed_processed&quot;</span>))</span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="fu">gc</span>()</span></code></pre></div>
+<pre><code>##             used  (Mb) gc trigger   (Mb)  max used   (Mb)
+## Ncells   2142223 114.5    3961348  211.6   2696611  144.1
+## Vcells 120825543 921.9  363241630 2771.4 363241101 2771.4</code></pre>
+</div>
+</div>
+<div id="glove-embeddings-with-english-language" class="section level2">
+<h2>GloVe Embeddings with English Language</h2>
+<p><code>keyclust</code> will work no matter what algorithm produced the
+embeddings, so long as they are in the proper format (embeddings as
+columns and words as rows). Below, I replicate the results for “peace”
+with GloVe embeddings.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>gl_embed <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">&quot;glove.6B.300d.txt&quot;</span>, <span class="at">nrows =</span> embedding_rows, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">quote =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a><span class="fu">names</span>(gl_embed) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;words&quot;</span>, <span class="fu">paste0</span>(<span class="st">&quot;V&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">300</span>)) <span class="co"># Default column names are not great</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="fu">dim</span>(gl_embed)</span></code></pre></div>
+<pre><code>## [1] 20000   301</code></pre>
+<div id="running-the-keyclust-model-2" class="section level3">
+<h3>Running the keyclust model</h3>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a>keyclust_peace_output <span class="ot">&lt;-</span></span>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a>  gl_embed <span class="sc">|&gt;</span></span>
+<span id="cb30-3"><a href="#cb30-3" tabindex="-1"></a>  <span class="fu">process_embed</span>(<span class="at">words =</span> <span class="st">&quot;words&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb30-4"><a href="#cb30-4" tabindex="-1"></a>  <span class="fu">similarity_matrix</span>(<span class="at">words =</span> <span class="st">&quot;words&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb30-5"><a href="#cb30-5" tabindex="-1"></a>  <span class="fu">keyclust</span>(<span class="at">seed_words =</span> peace, <span class="at">max_n =</span> <span class="dv">20</span>)</span></code></pre></div>
+<pre><code>## Initializing with peace, harmony, tranquility 
+## tranquility not found
+## Added unity 
+## Added reconciliation 
+## Added stability 
+## Added prosperity 
+## Added dialogue 
+## Added cooperation 
+## Added peaceful 
+## Added achieve 
+## Added equality 
+## Added promote 
+## Added integration 
+## Added aim 
+## Added strive 
+## Added foster 
+## Added sustainable 
+## Added stress 
+## Added strengthen 
+## Added enhance</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a>keyclust_peace_output <span class="sc">|&gt;</span></span>
+<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a>  <span class="fu">terms</span>() <span class="sc">|&gt;</span></span>
+<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Term</th>
+<th align="right">Group_similarity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">cooperation</td>
+<td align="right">0.4926774</td>
+</tr>
+<tr class="even">
+<td align="left">stability</td>
+<td align="right">0.4874538</td>
+</tr>
+<tr class="odd">
+<td align="left">promote</td>
+<td align="right">0.4716362</td>
+</tr>
+<tr class="even">
+<td align="left">unity</td>
+<td align="right">0.4623225</td>
+</tr>
+<tr class="odd">
+<td align="left">prosperity</td>
+<td align="right">0.4596273</td>
+</tr>
+<tr class="even">
+<td align="left">achieve</td>
+<td align="right">0.4526661</td>
+</tr>
+<tr class="odd">
+<td align="left">reconciliation</td>
+<td align="right">0.4492041</td>
+</tr>
+<tr class="even">
+<td align="left">strengthen</td>
+<td align="right">0.4399841</td>
+</tr>
+<tr class="odd">
+<td align="left">aim</td>
+<td align="right">0.4397282</td>
+</tr>
+<tr class="even">
+<td align="left">peace</td>
+<td align="right">0.4357661</td>
+</tr>
+<tr class="odd">
+<td align="left">integration</td>
+<td align="right">0.4352132</td>
+</tr>
+<tr class="even">
+<td align="left">enhance</td>
+<td align="right">0.4344182</td>
+</tr>
+<tr class="odd">
+<td align="left">dialogue</td>
+<td align="right">0.4316567</td>
+</tr>
+<tr class="even">
+<td align="left">stress</td>
+<td align="right">0.4304184</td>
+</tr>
+<tr class="odd">
+<td align="left">foster</td>
+<td align="right">0.4295480</td>
+</tr>
+<tr class="even">
+<td align="left">strive</td>
+<td align="right">0.4275260</td>
+</tr>
+<tr class="odd">
+<td align="left">sustainable</td>
+<td align="right">0.4234682</td>
+</tr>
+<tr class="even">
+<td align="left">equality</td>
+<td align="right">0.4156839</td>
+</tr>
+<tr class="odd">
+<td align="left">peaceful</td>
+<td align="right">0.4086250</td>
+</tr>
+<tr class="even">
+<td align="left">harmony</td>
+<td align="right">0.3953058</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="st">&quot;gl_embed&quot;</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a><span class="fu">gc</span>()</span></code></pre></div>
+<pre><code>##             used  (Mb) gc trigger   (Mb)  max used   (Mb)
+## Ncells   2145411 114.6    3961348  211.6   2696611  144.1
+## Vcells 121281036 925.4  608025612 4638.9 725159296 5532.6</code></pre>
+<p><em>Note:</em> The results are different, because of two main
+reasons: 1. These two models were fit on different corpora 2. The
+algorithms used to generate the embeddings have different properties.
+E.x. FastText tends to perform better for rarely occurring terms</p>
+</div>
+</div>
+<div id="fasttext-embeddings-with-chinese-language" class="section level2">
+<h2>FastText Embeddings with Chinese Language</h2>
+<p><code>keyclust</code> can be used to produce keyword sets from
+embeddings fit on any language! In this case, I generate a new “peace”
+dictionary using FastText Chinese embeddings.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a>ft_cn_embed <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">&quot;cc.zh.300.vec&quot;</span>, <span class="at">nrows =</span> embedding_rows, <span class="at">skip =</span> <span class="dv">1</span>, <span class="at">quote =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a><span class="fu">names</span>(ft_cn_embed) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;words&quot;</span>, <span class="fu">paste0</span>(<span class="st">&quot;V&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">300</span>)) <span class="co"># Default column names are not great</span></span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="fu">head</span>(ft_cn_embed[, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]) <span class="sc">|&gt;</span></span>
+<span id="cb36-2"><a href="#cb36-2" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<table>
+<colgroup>
+<col width="7%" />
+<col width="10%" />
+<col width="10%" />
+<col width="9%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">words</th>
+<th align="right">V1</th>
+<th align="right">V2</th>
+<th align="right">V3</th>
+<th align="right">V4</th>
+<th align="right">V5</th>
+<th align="right">V6</th>
+<th align="right">V7</th>
+<th align="right">V8</th>
+<th align="right">V9</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">，</td>
+<td align="right">0.0080</td>
+<td align="right">0.0336</td>
+<td align="right">0.5720</td>
+<td align="right">-0.1105</td>
+<td align="right">-0.0200</td>
+<td align="right">0.0195</td>
+<td align="right">-0.0129</td>
+<td align="right">-0.0258</td>
+<td align="right">0.0249</td>
+</tr>
+<tr class="even">
+<td align="left">的</td>
+<td align="right">-0.0119</td>
+<td align="right">0.0510</td>
+<td align="right">0.4397</td>
+<td align="right">-0.0427</td>
+<td align="right">-0.0501</td>
+<td align="right">-0.0258</td>
+<td align="right">-0.0060</td>
+<td align="right">-0.0676</td>
+<td align="right">-0.0776</td>
+</tr>
+<tr class="odd">
+<td align="left">。</td>
+<td align="right">0.0093</td>
+<td align="right">0.0210</td>
+<td align="right">0.7688</td>
+<td align="right">-0.0348</td>
+<td align="right">-0.0471</td>
+<td align="right">0.0540</td>
+<td align="right">-0.0309</td>
+<td align="right">-0.0107</td>
+<td align="right">-0.0753</td>
+</tr>
+<tr class="even">
+<td align="left"></s></td>
+<td align="right">-0.0112</td>
+<td align="right">-0.0688</td>
+<td align="right">1.0076</td>
+<td align="right">0.0070</td>
+<td align="right">-0.0300</td>
+<td align="right">-0.0195</td>
+<td align="right">-0.0107</td>
+<td align="right">0.0716</td>
+<td align="right">-0.0900</td>
+</tr>
+<tr class="odd">
+<td align="left">、</td>
+<td align="right">0.0658</td>
+<td align="right">0.0075</td>
+<td align="right">0.5058</td>
+<td align="right">0.0821</td>
+<td align="right">-0.0212</td>
+<td align="right">0.0265</td>
+<td align="right">-0.0398</td>
+<td align="right">0.0324</td>
+<td align="right">-0.0415</td>
+</tr>
+<tr class="even">
+<td align="left">是</td>
+<td align="right">-0.0058</td>
+<td align="right">0.0187</td>
+<td align="right">0.5163</td>
+<td align="right">-0.0498</td>
+<td align="right">-0.0657</td>
+<td align="right">0.0018</td>
+<td align="right">-0.0819</td>
+<td align="right">-0.1081</td>
+<td align="right">0.0015</td>
+</tr>
+</tbody>
+</table>
+<div id="seeds-for-target-concept-peace-1" class="section level3">
+<h3>Seeds for target concept: Peace</h3>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a>peace_cn <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;和平&quot;</span>, <span class="co"># he2ping2, peace</span></span>
+<span id="cb37-2"><a href="#cb37-2" tabindex="-1"></a>              <span class="st">&quot;平安&quot;</span>, <span class="co"># ping2an1, safe</span></span>
+<span id="cb37-3"><a href="#cb37-3" tabindex="-1"></a>              <span class="st">&quot;和谐&quot;</span>) <span class="co"># he2xie2, harmonious</span></span></code></pre></div>
+</div>
+<div id="running-the-keyclust-model-3" class="section level3">
+<h3>Running the keyclust model</h3>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a>keyclust_peace_output <span class="ot">&lt;-</span></span>
+<span id="cb38-2"><a href="#cb38-2" tabindex="-1"></a>  ft_cn_embed <span class="sc">|&gt;</span></span>
+<span id="cb38-3"><a href="#cb38-3" tabindex="-1"></a>  <span class="fu">process_embed</span>(<span class="at">words =</span> <span class="st">&quot;words&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb38-4"><a href="#cb38-4" tabindex="-1"></a>  <span class="fu">similarity_matrix</span>(<span class="at">words =</span> <span class="st">&quot;words&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb38-5"><a href="#cb38-5" tabindex="-1"></a>  <span class="fu">keyclust</span>(<span class="at">seed_words =</span> peace_cn,</span>
+<span id="cb38-6"><a href="#cb38-6" tabindex="-1"></a>           <span class="co">#max_n = 20,</span></span>
+<span id="cb38-7"><a href="#cb38-7" tabindex="-1"></a>           <span class="at">sim_thresh =</span> <span class="fl">0.4</span>)</span></code></pre></div>
+<pre><code>## Initializing with 和平, 平安, 和谐 
+## Added 和睦 
+## Added 安宁 
+## Added 安定 
+## Added 幸福 
+## Added 繁荣 
+## Added 宁静 
+## Added 平静 
+## Added 安静 
+## Added 平稳 
+## Added 稳定 
+## Added 平和</code></pre>
+<p><em>Note:</em> Removing capitalization and lemmatization are not
+relevant for Chinese, so in this case <code>process_embed</code> only
+converts the data.table to the optimal format for subsequent
+functions</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a>keyclust_peace_output <span class="sc">|&gt;</span></span>
+<span id="cb40-2"><a href="#cb40-2" tabindex="-1"></a>  <span class="fu">terms</span>() <span class="sc">|&gt;</span></span>
+<span id="cb40-3"><a href="#cb40-3" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Term</th>
+<th align="right">Group_similarity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">安宁</td>
+<td align="right">0.5442269</td>
+</tr>
+<tr class="even">
+<td align="left">平静</td>
+<td align="right">0.5324156</td>
+</tr>
+<tr class="odd">
+<td align="left">宁静</td>
+<td align="right">0.5144734</td>
+</tr>
+<tr class="even">
+<td align="left">和谐</td>
+<td align="right">0.5032739</td>
+</tr>
+<tr class="odd">
+<td align="left">平稳</td>
+<td align="right">0.5006899</td>
+</tr>
+<tr class="even">
+<td align="left">安静</td>
+<td align="right">0.4917516</td>
+</tr>
+<tr class="odd">
+<td align="left">稳定</td>
+<td align="right">0.4881946</td>
+</tr>
+<tr class="even">
+<td align="left">安定</td>
+<td align="right">0.4874412</td>
+</tr>
+<tr class="odd">
+<td align="left">平和</td>
+<td align="right">0.4673584</td>
+</tr>
+<tr class="even">
+<td align="left">繁荣</td>
+<td align="right">0.4661916</td>
+</tr>
+<tr class="odd">
+<td align="left">和睦</td>
+<td align="right">0.4648274</td>
+</tr>
+<tr class="even">
+<td align="left">和平</td>
+<td align="right">0.4433043</td>
+</tr>
+<tr class="odd">
+<td align="left">幸福</td>
+<td align="right">0.4137163</td>
+</tr>
+<tr class="even">
+<td align="left">平安</td>
+<td align="right">0.3833162</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="final-notes" class="section level2">
+<h2>Final notes</h2>
+<p>Feel free to use <code>keyclust</code> to generate keywords of your
+own. I would be grateful for any feedback or suggestions.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
