@@ -2,8 +2,7 @@
 ## About
 
 An R package designed to enable researchers to quickly and efficiently
-generate customized sets of keywords, created by [Patrick
-Chester](patrickjchester.com).
+generate customized sets of keywords.
 
 For more information about the methods underlying this package see
 [Chester (2025)](https://doi.org/10.17605/OSF.IO/5B7RQ).
