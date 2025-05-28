@@ -14,7 +14,7 @@
 #' @keywords keyclust
 #' @import data.table
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Create a set of keywords using a pre-defined set of seeds
 #' seeds <- c("October", "November")
 #' # Create a cosine similarity matrix from a word embedding model
