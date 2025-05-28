@@ -12,6 +12,7 @@
 #' @import textstem
 #' @import data.table
 #' @export
+#' @return A data frame with the same columns as the input, but with redundant terms combined.
 process_embed <- function(x, words = NULL, punct = TRUE, tolower = TRUE, lemmatize = TRUE, stem = FALSE) {
     UseMethod("process_embed")
 }

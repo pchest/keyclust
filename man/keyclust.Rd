@@ -30,13 +30,15 @@ for it to be added.}
 
 \item{verbose}{If true, keyclust will produce live updates as it adds keywords.}
 }
+\value{
+A list containing a data frame of keywords and their cosine similarities, and a matrix of cosine similarities.
+}
 \description{
 This function takes a cosine similarity matrix derived from a word embedding model,
 along with a set of seed words and outputs a semantically-related set of keywords of
 a length and cosimilarity determined by the user
 }
 \examples{
-\dontrun{
 # Create a set of keywords using a pre-defined set of seeds
 seeds <- c("October", "November")
 # Create a cosine similarity matrix from a word embedding model
@@ -45,6 +47,5 @@ simmat_FasttextEng_sample <- wordemb_FasttextEng_sample |>
     similarity_matrix(words = "words")
 # Use keyclust to generate a set of keywords
 months <- keyclust(simmat_FasttextEng_sample, seed_words = seeds, max_n = 8)
-}
 }
 \keyword{keyclust}

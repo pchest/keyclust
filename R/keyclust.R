@@ -23,6 +23,7 @@
 #' # Use keyclust to generate a set of keywords
 #' months <- keyclust(simmat_FasttextEng_sample, seed_words = seeds, max_n = 8)
 #' @export
+#' @return A list containing a data frame of keywords and their cosine similarities, and a matrix of cosine similarities.
 keyclust <- function(sim_mat,
                      seed_words,
                      sim_thresh = 0.25,
@@ -154,6 +155,7 @@ keyclust.matrix <- function(sim_mat,
 #' @method terms keyclust
 #' @export
 #' @rdname terms
+#' @return A data frame of terms and their cosine similarities.
 terms.keyclust <- function(x, ...) {
     return(x$Concept_lex)
 }
@@ -166,6 +168,7 @@ terms.keyclust <- function(x, ...) {
 #' @importFrom utils head
 #' @export
 #' @rdname print
+#' @return A message indicating the number of keywords produced and a preview of the first few keywords.
 print.keyclust <- function(x, ...) {
     cat("keyclust produced", nrow(x$Concept_lex), "keywords\n\n")
     print(head(x$Concept_lex))

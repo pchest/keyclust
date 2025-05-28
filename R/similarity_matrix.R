@@ -12,6 +12,7 @@
 #' # Create a set of keywords using a pre-defined set of seeds
 #' simmat <- similarity_matrix(wordemb_FasttextEng_sample, words = "words")
 #' @export
+#' @return An N x N matrix of cosine similarity scores between words from a fitted word embedding model.
 similarity_matrix <- function(x,
                               words = NULL,
                               max_terms = 25000) {

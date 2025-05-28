@@ -14,14 +14,15 @@ similarity_matrix(x, words = NULL, max_terms = 25000)
 \item{max_terms}{The maximum number of embedding terms that will be included in output similarity matrix.
 Assumes that embedding input is ordered by word frequency.}
 }
+\value{
+An N x N matrix of cosine similarity scores between words from a fitted word embedding model.
+}
 \description{
 This function takes a fitted word embedding model and computes the cosine similarity between
 each word.
 }
 \examples{
-\dontrun{
 # Create a set of keywords using a pre-defined set of seeds
 simmat <- similarity_matrix(wordemb_FasttextEng_sample, words = "words")
-}
 }
 \keyword{keyclust}

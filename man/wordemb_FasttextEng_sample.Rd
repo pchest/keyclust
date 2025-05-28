@@ -17,9 +17,9 @@ This is a data frame containing the 2,000 most frequently occurring
 terms from Facebook's English-language fastText word embeddings model.
 }
 \examples{
-\donttest{
 data(wordemb_FasttextEng_sample)
-}
+head(wordemb_FasttextEng_sample)
+
 }
 \references{
 P. Bojanowski*, E. Grave*, A. Joulin, T. Mikolov,

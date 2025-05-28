@@ -26,6 +26,9 @@ process_embed(
 
 \item{stem}{Combines terms that share a common stem. \emph{Note:} Stemming should not be used in conjunction with lemmatize.}
 }
+\value{
+A data frame with the same columns as the input, but with redundant terms combined.
+}
 \description{
 Takes a fitted embedding model as an input. Allows users to combine
 embeddings by the case, stem, or lemma of associated terms.

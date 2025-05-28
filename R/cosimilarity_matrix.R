@@ -5,6 +5,7 @@
 #' @param x output from [keyclust()]
 #' @keywords keyclust
 #' @export
+#' @return An N x N matrix of cosine cosimilarity values, where n is the number of terms in the provided embedding model
 cosimilarity_matrix <- function(x) {
     UseMethod("cosimilarity_matrix")
 }

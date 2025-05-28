@@ -11,6 +11,9 @@
 
 \item{...}{additional arguments not used}
 }
+\value{
+A data frame of terms and their cosine similarities.
+}
 \description{
 A function that returns the terms and their cosine cosimilarities
 produced by \code{\link[=keyclust]{keyclust()}}
