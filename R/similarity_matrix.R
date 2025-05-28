@@ -9,10 +9,8 @@
 #' @keywords keyclust
 #' @import data.table
 #' @examples
-#' \donttest{
 #' # Create a set of keywords using a pre-defined set of seeds
 #' simmat <- similarity_matrix(wordemb_FasttextEng_sample, words = "words")
-#' }
 #' @export
 similarity_matrix <- function(x,
                               words = NULL,

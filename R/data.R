@@ -8,9 +8,9 @@
 #' column gives the terms associated with each word vector.
 #'
 #' @examples
-#' \donttest{
 #' data(wordemb_FasttextEng_sample)
-#' }
+#' head(wordemb_FasttextEng_sample)
+#'
 #' @references P. Bojanowski*, E. Grave*, A. Joulin, T. Mikolov,
 #' Enriching Word Vectors with Subword Information
 #' (\href{https://arxiv.org/abs/1607.04606}{arxiv})

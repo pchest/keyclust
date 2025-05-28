@@ -14,7 +14,6 @@
 #' @keywords keyclust
 #' @import data.table
 #' @examples
-#' \donttest{
 #' # Create a set of keywords using a pre-defined set of seeds
 #' seeds <- c("October", "November")
 #' # Create a cosine similarity matrix from a word embedding model
@@ -23,7 +22,6 @@
 #'     similarity_matrix(words = "words")
 #' # Use keyclust to generate a set of keywords
 #' months <- keyclust(simmat_FasttextEng_sample, seed_words = seeds, max_n = 8)
-#' }
 #' @export
 keyclust <- function(sim_mat,
                      seed_words,
