@@ -5,8 +5,7 @@ Version: 1.2.5
 Authors@R: person("Patrick", "Chester",
                   email = "patrickjchester@gmail.com",
                   role = c("aut", "cre"))
-Description: A fast and computationally efficient algorithm designed to enable researchers to efficiently and quickly extract semantically-related keywords using a fitted embedding model. For more details about the methods applied, see Chester (2025).
-<doi:10.17605/OSF.IO/5B7RQ>.
+Description: A fast and computationally efficient algorithm designed to enable researchers to efficiently and quickly extract semantically-related keywords using a fitted embedding model. For more details about the methods applied, see Chester (2025). <doi:10.17605/OSF.IO/5B7RQ>.
 Encoding: UTF-8
 License: GPL-3
 Depends:
